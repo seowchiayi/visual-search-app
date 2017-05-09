@@ -208,7 +208,7 @@ public class Game extends Activity {
             @Override
             public void onClick(View v) {
                 countdown.cancel();
-                if(p.equals("a") || ans.substring(23,24).equals("a")){
+                if(ans.substring(23,24).equals("a")){
                     correct_absent+=1;
                 }
                 gameplay();

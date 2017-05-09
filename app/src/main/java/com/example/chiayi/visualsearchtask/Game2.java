@@ -211,7 +211,7 @@ public class Game2 extends Activity {
             @Override
             public void onClick(View v) {
                 countdown.cancel();
-                if(p.equals("a") || ans.substring(27,28).equals("a")){
+                if(ans.substring(27,28).equals("a")){
                     Game.correct_absent+=1;
                 }
                 gameplay();
@@ -223,6 +223,7 @@ public class Game2 extends Activity {
         Log.i("con6",String.valueOf(con6));
         Log.i("con9",String.valueOf(con9));
         Log.i("con12",String.valueOf(con12));
+        Log.i("ca",String.valueOf(Game.correct_absent));
 
         if(i==imgs.length()+1){
             FirebaseDatabase db=FirebaseDatabase.getInstance();
