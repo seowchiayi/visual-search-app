@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">VisualSearchTask</string>
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <integer-array name="feature_img">
+        <item>@drawable/feature3_p</item>
+        <item>@drawable/feature3_a</item>
+        <item>@drawable/feature6_a</item>
+        <item>@drawable/feature6_p</item>
+    </integer-array>
+    <integer-array name="conjunction_img">
+        <item>@drawable/conjunction6_p</item>
+        <item>@drawable/conjunction6_a</item>
+        <item>@drawable/conjunction3_p</item>
+        <item>@drawable/conjunction3_a</item>
+    </integer-array>
+</resources>
+

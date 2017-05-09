@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.chiayi.visualsearchtask.Game">
+
+    <!--<ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gamepagetoolbar"/>-->
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/username"
+        android:padding="18dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/displaybar"
+        android:text="test"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/level"
+        android:padding="18dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/displaybar"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:text=""
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/score"
+        android:padding="18dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/displaybar"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
+        android:text=""
+        android:layout_alignParentRight="true"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="72dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text=""
+            android:id="@+id/timer"
+            android:textSize="32dp"
+            android:layout_gravity="center"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:id="@+id/image"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="370dp">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:text="present"
+            android:id="@+id/present"
+            android:textAllCaps="true"
+            android:onClick="present"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:text="absent"
+            android:id="@+id/absent"
+            android:textAllCaps="true"
+            android:onClick="absent"/>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

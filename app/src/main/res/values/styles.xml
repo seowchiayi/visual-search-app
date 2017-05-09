@@ -1,0 +1,18 @@
+    <resources>
+    <color name="displaybar">#FFF5F5F5</color>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Material.Light" >
+        <!-- Customize your theme here. -->
+        <!-- Main theme colors -->
+        <!--   your app branding color for the app bar -->
+       <!-- <item name="android:colorPrimary">@android:color/white</item>
+        &lt;!&ndash;   darker variant for the status bar and contextual app bars &ndash;&gt;
+        <item name="android:textColorPrimary">@android:color/black</item>
+        &lt;!&ndash;   theme UI controls like checkboxes and text fields &ndash;&gt;
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:colorButtonNormal">@android:color/white</item>
+        <item name="android:textColor">@android:color/black</item>-->
+
+    </style>
+
+</resources>
