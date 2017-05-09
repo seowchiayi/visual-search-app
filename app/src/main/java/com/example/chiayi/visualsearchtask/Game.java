@@ -48,6 +48,13 @@ public class Game extends Activity {
     double avgtime_feature_9;
     double avgtime_feature_12;
 
+
+    int fea3=0;
+    int fea6=0;
+    int fea9=0;
+    int fea12=0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,8 +149,7 @@ public class Game extends Activity {
             img.setImageResource(imgs.getResourceId(rndInt, 0));
         }
 
-
-        countdown=new CountDownTimer(16000, 1000) {
+        countdown=new CountDownTimer(11000, 1000) {
             public void onTick(long millisUntilFinished) {
                 time_left=millisUntilFinished/1000;
                 timer.setText(time_left+" s");
@@ -155,8 +161,10 @@ public class Game extends Activity {
             }
         }.start();
 
+
         final String p=ans.substring(22,23);
-        final int dist=Integer.parseInt(ans.substring(20,21));
+        final String dist=ans.substring(20,21);
+
 
         present.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,22 +174,27 @@ public class Game extends Activity {
                 score.setText("Score : "+result);
                 if(p.equals("p")){
 
-                    Log.i("check2021",ans.substring(20,21));
-
-                    if(dist==3){
+                    if(dist.equals(String.valueOf(3))){
                         avgtime_feature_3+=time_left;
-                        Log.i("score",String.valueOf(avgtime_feature_3));
+                        fea3++;
                     }
-                    else if(dist==6){
+                    else if(dist.equals(String.valueOf(6))){
                         avgtime_feature_6+=time_left;
+                        fea6++;
                     }
-                    else if(dist==9){
+                    else if(dist.equals(String.valueOf(9))){
                         avgtime_feature_9+=time_left;
+                        fea9++;
                     }
-                    else if(dist==12){
+
+                }
+                if(ans.substring(23,24).equals("p")){
+                    if(ans.substring(20,22).equals(String.valueOf(12))){
                         avgtime_feature_12+=time_left;
+                        fea12++;
                     }
                 }
+
                 gameplay();
 
 
@@ -195,7 +208,7 @@ public class Game extends Activity {
             @Override
             public void onClick(View v) {
                 countdown.cancel();
-                if(p.equals("a")){
+                if(p.equals("a") || ans.substring(23,24).equals("a")){
                     correct_absent+=1;
                 }
                 gameplay();
@@ -204,7 +217,10 @@ public class Game extends Activity {
         });
 
 
-
+        Log.i("fea3",String.valueOf(fea3));
+        Log.i("fea6",String.valueOf(fea6));
+        Log.i("fea9",String.valueOf(fea9));
+        Log.i("fea12",String.valueOf(fea12));
         if(i==imgs.length()+1){
 
             if(MainActivity.user.getAccurate()>=75){
@@ -213,9 +229,8 @@ public class Game extends Activity {
             else{
                 MainActivity.user.setStatus("Fail");
             }
-            Log.i("test before",String.valueOf(avgtime_feature_3));
-            MainActivity.user.setFea_AvgTime3(avgtime_feature_3/2);
-            Log.i("get",String.valueOf(MainActivity.user.getFea_AvgTime3()));
+
+            MainActivity.user.setFea_AvgTime3(avgtime_feature_3/5);
             MainActivity.user.setFea_AvgTime6(avgtime_feature_6/5);
             MainActivity.user.setFea_AvgTime9(avgtime_feature_9/5);
             MainActivity.user.setFea_AvgTime12(avgtime_feature_12/5);

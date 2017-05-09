@@ -49,6 +49,11 @@ public class Game2 extends Activity {
     double avgtime_con_9;
     double avgtime_con_12;
 
+    int con3=0;
+    int con6=0;
+    int con9=0;
+    int con12=0;
+
 
     int counter=0;
 
@@ -144,7 +149,7 @@ public class Game2 extends Activity {
             img.setImageResource(imgs.getResourceId(rndInt, 0));
         }
 
-        countdown=new CountDownTimer(16000, 1000) {
+        countdown=new CountDownTimer(11000, 1000) {
             public void onTick(long millisUntilFinished) {
                 time_left=millisUntilFinished/1000;
                 timer.setText(time_left+" s");
@@ -157,7 +162,14 @@ public class Game2 extends Activity {
             }
         }.start();
         final String p=ans.substring(26,27);
-        final int dist=Integer.parseInt(ans.substring(24,25));
+        final String dist=ans.substring(24,25);
+
+        Log.i("p",p);
+        Log.i("dist",String.valueOf(dist));
+        Log.i("12ap",ans.substring(27,28));
+        Log.i("dist12",ans.substring(24,26));
+
+
 
         present.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,21 +180,28 @@ public class Game2 extends Activity {
 
                     Log.i("in present",String.valueOf(Game.result));
                     score.setText("Score: "+Game.result);
-                    if(dist==3){
+                    if(dist.equals(String.valueOf(3))){
                         avgtime_con_3+=time_left;
-                        Log.i("score",String.valueOf(avgtime_con_3));
+                        con3++;
                     }
-                    else if(dist==6){
+                    else if(dist.equals(String.valueOf(6))){
                         avgtime_con_6+=time_left;
+                        con6++;
                     }
-                    else if(dist==9){
+                    else if(dist.equals(String.valueOf(9))){
                         avgtime_con_9+=time_left;
-                    }
-                    else if(dist==12){
-                        avgtime_con_12+=time_left;
+                        con9++;
                     }
 
+
                 }
+                if(ans.substring(27,28).equals("p")){
+                    if(ans.substring(24,26).equals(String.valueOf(12))){
+                        avgtime_con_12+=time_left;
+                        con12++;
+                    }
+                }
+
                 gameplay();
 
 
@@ -192,7 +211,7 @@ public class Game2 extends Activity {
             @Override
             public void onClick(View v) {
                 countdown.cancel();
-                if(p.equals("a")){
+                if(p.equals("a") || ans.substring(27,28).equals("a")){
                     Game.correct_absent+=1;
                 }
                 gameplay();
@@ -200,21 +219,27 @@ public class Game2 extends Activity {
             }
         });
 
+        Log.i("con3",String.valueOf(con3));
+        Log.i("con6",String.valueOf(con6));
+        Log.i("con9",String.valueOf(con9));
+        Log.i("con12",String.valueOf(con12));
+
         if(i==imgs.length()+1){
             FirebaseDatabase db=FirebaseDatabase.getInstance();
             DatabaseReference ref=db.getReference();
             MainActivity.user.setScore(String.valueOf(Game.result));
-            MainActivity.user.setAccurate((Game.correct_absent/4)*100);
+            MainActivity.user.setAccurate((Game.correct_absent/40)*100);
             if(MainActivity.user.getAccurate()>=75){
                 MainActivity.user.setStatus("Pass");
             }
             else{
                 MainActivity.user.setStatus("Fail");
             }
-            MainActivity.user.setCon_AvgTime3(avgtime_con_3/2);
+            MainActivity.user.setCon_AvgTime3(avgtime_con_3/5);
             MainActivity.user.setCon_AvgTime6(avgtime_con_6/5);
             MainActivity.user.setCon_AvgTime9(avgtime_con_9/5);
             MainActivity.user.setCon_AvgTime12(avgtime_con_12/5);
+
             //to be call after everything ends because we need to get avg
 
             ref.push().setValue(MainActivity.user);

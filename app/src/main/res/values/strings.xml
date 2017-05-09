@@ -7,16 +7,89 @@
     <integer-array name="feature_img">
         <item>@drawable/feature3_p1</item>
         <item>@drawable/feature3_p2</item>
+        <item>@drawable/feature3_p3</item>
+        <item>@drawable/feature3_p4</item>
+        <item>@drawable/feature3_p5</item>
+        <item>@drawable/feature6_p1</item>
+        <item>@drawable/feature6_p2</item>
+        <item>@drawable/feature6_p3</item>
+        <item>@drawable/feature6_p4</item>
+        <item>@drawable/feature6_p5</item>
+        <item>@drawable/feature9_p1</item>
+        <item>@drawable/feature9_p2</item>
+        <item>@drawable/feature9_p3</item>
+        <item>@drawable/feature9_p4</item>
+        <item>@drawable/feature9_p5</item>
+        <item>@drawable/feature12_p1</item>
+        <item>@drawable/feature12_p2</item>
+        <item>@drawable/feature12_p3</item>
+        <item>@drawable/feature12_p4</item>
+        <item>@drawable/feature12_p5</item>
 
         <item>@drawable/feature3_a1</item>
         <item>@drawable/feature3_a2</item>
+        <item>@drawable/feature3_a3</item>
+        <item>@drawable/feature3_a4</item>
+        <item>@drawable/feature3_a5</item>
+        <item>@drawable/feature6_a1</item>
+        <item>@drawable/feature6_a2</item>
+        <item>@drawable/feature6_a3</item>
+        <item>@drawable/feature6_a4</item>
+        <item>@drawable/feature6_a5</item>
+        <item>@drawable/feature9_a1</item>
+        <item>@drawable/feature9_a2</item>
+        <item>@drawable/feature9_a3</item>
+        <item>@drawable/feature9_a4</item>
+        <item>@drawable/feature9_a5</item>
+        <item>@drawable/feature12_a1</item>
+        <item>@drawable/feature12_a2</item>
+        <item>@drawable/feature12_a3</item>
+        <item>@drawable/feature12_a4</item>
+        <item>@drawable/feature12_a5</item>
     </integer-array>
     <integer-array name="conjunction_img">
 
         <item>@drawable/conjunction3_p1</item>
         <item>@drawable/conjunction3_p2</item>
+        <item>@drawable/conjunction3_p3</item>
+        <item>@drawable/conjunction3_p4</item>
+        <item>@drawable/conjunction3_p5</item>
+        <item>@drawable/conjunction6_p1</item>
+        <item>@drawable/conjunction6_p2</item>
+        <item>@drawable/conjunction6_p3</item>
+        <item>@drawable/conjunction6_p4</item>
+        <item>@drawable/conjunction6_p5</item>
+        <item>@drawable/conjunction9_p1</item>
+        <item>@drawable/conjunction9_p2</item>
+        <item>@drawable/conjunction9_p3</item>
+        <item>@drawable/conjunction9_p4</item>
+        <item>@drawable/conjunction9_p5</item>
+        <item>@drawable/conjunction12_p1</item>
+        <item>@drawable/conjunction12_p2</item>
+        <item>@drawable/conjunction12_p3</item>
+        <item>@drawable/conjunction12_p4</item>
+        <item>@drawable/conjunction12_p5</item>
+
         <item>@drawable/conjunction3_a1</item>
         <item>@drawable/conjunction3_a2</item>
+        <item>@drawable/conjunction3_a3</item>
+        <item>@drawable/conjunction3_a4</item>
+        <item>@drawable/conjunction3_a5</item>
+        <item>@drawable/conjunction6_a1</item>
+        <item>@drawable/conjunction6_a2</item>
+        <item>@drawable/conjunction6_a3</item>
+        <item>@drawable/conjunction6_a4</item>
+        <item>@drawable/conjunction6_a5</item>
+        <item>@drawable/conjunction9_a1</item>
+        <item>@drawable/conjunction9_a2</item>
+        <item>@drawable/conjunction9_a3</item>
+        <item>@drawable/conjunction9_a4</item>
+        <item>@drawable/conjunction9_a5</item>
+        <item>@drawable/conjunction12_a1</item>
+        <item>@drawable/conjunction12_a2</item>
+        <item>@drawable/conjunction12_a3</item>
+        <item>@drawable/conjunction12_a4</item>
+        <item>@drawable/conjunction12_a5</item>
     </integer-array>
 </resources>
 
