@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="5"
-            android:textSize="15sp"
+            android:textSize="18sp"
             android:textColor="@android:color/darker_gray"
             android:text="Gender:"/>
         <Spinner
@@ -78,30 +78,17 @@
         android:textColor="@android:color/black"
         android:backgroundTint="@android:color/darker_gray"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
-        android:orientation="horizontal">
         <Button
             android:id="@+id/signup"
-            android:layout_width="0dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:layout_marginRight="32dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="34dp"
             android:text="Sign Up"
             android:textAllCaps="true"
             android:onClick="signup"/>
-        <Button
-            android:id="@+id/login"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Login"
-            android:textAllCaps="true"
-            android:onClick="login"/>
 
-    </LinearLayout>
+
 
 
 

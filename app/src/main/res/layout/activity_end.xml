@@ -16,10 +16,10 @@
         android:textAlignment="center"
         android:textSize="40dp" />
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Replay"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="127dp"
         android:textAllCaps="true"
         android:layout_gravity="center"
         android:onClick="replay"/>

@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,13 +16,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Game2 extends Activity {
     //carrying matric and username from previous activity
     String msg;
-    String num;
     //initializing components in xml
     TextView username;
     TextView level;
@@ -43,10 +40,9 @@ public class Game2 extends Activity {
     String ans;
     //to get the time left as score
     long time_left;
-    //total score for the user
-    int result;
+
     //to know if user passed 75% of correctness for absent trials to make sure user is paying attention while playing
-    double correct_absent=0;
+
 
     double avgtime_con_3;
     double avgtime_con_6;
@@ -54,8 +50,6 @@ public class Game2 extends Activity {
     double avgtime_con_12;
 
 
-
-    String pass="";
     int counter=0;
 
     @Override
@@ -64,10 +58,8 @@ public class Game2 extends Activity {
         setContentView(R.layout.activity_game);
         //getting intent from pervious activity
         Intent intent=getIntent();
-        msg=intent.getStringExtra("username");
-        num=intent.getStringExtra("matric");
-        pass=intent.getStringExtra("key");
-
+        msg=intent.getStringExtra("msg");
+        Log.i("Game result",String.valueOf(Game.result));
         //initializing componenets in xml
         username=(TextView)findViewById(R.id.username);
         level=(TextView)findViewById(R.id.level);
@@ -82,21 +74,28 @@ public class Game2 extends Activity {
 
         //set original name,level,score on top of the display bar
         username.setText(msg);
-        level.setText(0+"/"+imgs.length());
-        score.setText("Score : " + result);
+        level.setText(1+"/"+imgs.length());
+        score.setText("Score : " + Game.result);
 
         //start intializing runtask that randomize images, restart and cancel timer and handles button event
-        runtask();
+        gameplay();
 
     }
     //run task schedule the runtask method to run periodically until the level ends
-    public void runtask() {
+    /*public void runtask() {
         final Handler handler = new Handler();
         final Timer t = new Timer(); //This is new
         TimerTask timertask= new TimerTask() {
 
             @Override
             public void run() {
+                if(++counter==imgs.length()+1){
+                    t.cancel();
+                    Intent target = new Intent(Game2.this,End.class);
+                    startActivity(target);
+                    finish();
+
+                }
                 runOnUiThread(new Runnable() {
                     public void run() {
                         try {
@@ -108,24 +107,19 @@ public class Game2 extends Activity {
                         }
                     }
                 });
-                if(++counter==imgs.length()+1){
-                    t.cancel();
-                    Intent target = new Intent(Game2.this,End.class);
-                    startActivity(target);
 
-                }
             }
         };
 
-        t.scheduleAtFixedRate(timertask, 1000, 3000); // execute in every 15sec
-    }
+        t.scheduleAtFixedRate(timertask, 0, 11000); // execute in every 15sec
+    }*/
 
     //the method that will be repeated, the core of the page
     public void gameplay() {
         i++;
-        level.setText(String.valueOf(i) + "/" + String.valueOf(imgs.length()));
         Random rand = new Random();
         if(i>1 && i<=imgs.length()){
+            level.setText(String.valueOf(i) + "/" + String.valueOf(imgs.length()));
             int rndInt = rand.nextInt(imgs.length());
             while(remove.contains(rndInt)){
                 rndInt = rand.nextInt(imgs.length());
@@ -150,73 +144,86 @@ public class Game2 extends Activity {
             img.setImageResource(imgs.getResourceId(rndInt, 0));
         }
 
-        countdown=new CountDownTimer(3000, 1000) {
+        countdown=new CountDownTimer(16000, 1000) {
             public void onTick(long millisUntilFinished) {
                 time_left=millisUntilFinished/1000;
                 timer.setText(time_left+" s");
             }
 
             public void onFinish() {
-                //timer.setText("Times up!");
+
+                timer.setText("Times Up!");
+                gameplay();
             }
         }.start();
+        final String p=ans.substring(26,27);
+        final int dist=Integer.parseInt(ans.substring(24,25));
 
         present.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                countdown.cancel();
+                if(p.equals("p")){
+                    Game.result+=time_left;
 
-                if(ans.substring(27,28).equals("p")){
-                    result+=time_left;
-                    score.setText("Score: "+result);
-                    if(ans.substring(24,25).equals(String.valueOf(3))){
-                        avgtime_con_3+=result;
+                    Log.i("in present",String.valueOf(Game.result));
+                    score.setText("Score: "+Game.result);
+                    if(dist==3){
+                        avgtime_con_3+=time_left;
+                        Log.i("score",String.valueOf(avgtime_con_3));
                     }
-                    else if(ans.substring(24,25).equals(String.valueOf(6))){
-                        avgtime_con_6+=result;
+                    else if(dist==6){
+                        avgtime_con_6+=time_left;
                     }
-                    else if(ans.substring(24,25).equals(String.valueOf(9))){
-                        avgtime_con_9+=result;
+                    else if(dist==9){
+                        avgtime_con_9+=time_left;
                     }
-                    else if(ans.substring(24,25).equals(String.valueOf(12))){
-                        avgtime_con_12+=result;
+                    else if(dist==12){
+                        avgtime_con_12+=time_left;
                     }
 
                 }
-                countdown.cancel();
+                gameplay();
+
 
             }
         });
         absent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if(ans.substring(27,28).equals("a")){
-                    correct_absent+=1;
-                }
                 countdown.cancel();
+                if(p.equals("a")){
+                    Game.correct_absent+=1;
+                }
+                gameplay();
+
             }
         });
 
-        if(i==imgs.length()){
-            Record r=new Record();
+        if(i==imgs.length()+1){
             FirebaseDatabase db=FirebaseDatabase.getInstance();
             DatabaseReference ref=db.getReference();
-            r.setScore(String.valueOf(result));
-            r.setAccurate((correct_absent/imgs.length())*100);
-            if(r.getAccurate()>=75){
-                r.setStatus("Pass");
+            MainActivity.user.setScore(String.valueOf(Game.result));
+            MainActivity.user.setAccurate((Game.correct_absent/4)*100);
+            if(MainActivity.user.getAccurate()>=75){
+                MainActivity.user.setStatus("Pass");
             }
             else{
-                r.setStatus("Fail");
+                MainActivity.user.setStatus("Fail");
             }
-            r.setCon_AvgTime3(avgtime_con_3/imgs.length());
-            r.setCon_AvgTime6(avgtime_con_6/imgs.length());
-            r.setCon_AvgTime9(avgtime_con_9/imgs.length());
-            r.setCon_AvgTime12(avgtime_con_12/imgs.length());
+            MainActivity.user.setCon_AvgTime3(avgtime_con_3/2);
+            MainActivity.user.setCon_AvgTime6(avgtime_con_6/5);
+            MainActivity.user.setCon_AvgTime9(avgtime_con_9/5);
+            MainActivity.user.setCon_AvgTime12(avgtime_con_12/5);
             //to be call after everything ends because we need to get avg
-            ref.child(pass).child("Stage 2").setValue(r);
+
+            ref.push().setValue(MainActivity.user);
+            Intent target = new Intent(Game2.this,End.class);
+            startActivity(target);
+            finish();
 
         }
+
 
 
     }

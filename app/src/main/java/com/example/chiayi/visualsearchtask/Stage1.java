@@ -14,15 +14,11 @@ public class Stage1 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stage1);
         Intent instruction=getIntent();
-        msg=instruction.getStringExtra("username");
-        num=instruction.getStringExtra("matric");
-        pass=instruction.getStringExtra("key");
+        msg=instruction.getStringExtra("msg");
     }
     public void play(View v){
         Intent game = new Intent(Stage1.this,Game.class);
-        game.putExtra("username",msg);
-        game.putExtra("matric",num);
-        game.putExtra("key",pass);
+        game.putExtra("msg",msg);
         startActivity(game);
         finish();
 

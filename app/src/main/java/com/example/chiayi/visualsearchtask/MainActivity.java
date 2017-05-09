@@ -10,13 +10,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 public class MainActivity extends Activity {
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter;
     String gender;
+    public static User user = new User();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,38 +41,26 @@ public class MainActivity extends Activity {
         });
 
     }
-    public void signup(View view){
+    public void signup(View view) {
         EditText editname = (EditText) findViewById(R.id.name);
         EditText editage = (EditText) findViewById(R.id.age);
         EditText editmatric = (EditText) findViewById(R.id.matric);
 
         //upload user details into firebase
-        FirebaseDatabase db=FirebaseDatabase.getInstance();
-        DatabaseReference ref=db.getReference();
-        String name=editname.getText().toString().trim();
-        String age=editage.getText().toString().trim();
-        String matric=editmatric.getText().toString().trim();
-        User user=new User();
+        String name = editname.getText().toString().trim();
+        String age = editage.getText().toString().trim();
+        String matric = editmatric.getText().toString().trim();
 
         user.setName(name);
         user.setAge(age);
         user.setGender(gender);
         user.setMatric(matric);
-        ref.push().setValue(user);
-
-
-        Intent intent = new Intent(MainActivity.this,Login.class);
-        String msg=editname.getText().toString();
-        String num=editmatric.getText().toString();
-        intent.putExtra("username",msg);
-        intent.putExtra("matric",num);
-        finish();
-
-    }
-    public void login(View view){
-        Intent intent = new Intent(MainActivity.this,Login.class);
+        Intent intent = new Intent(MainActivity.this, Instruction.class);
+        intent.putExtra("msg",name);
         startActivity(intent);
+        finish();
     }
+
 
 }
 

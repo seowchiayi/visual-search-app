@@ -59,8 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_gravity="center"
-            android:id="@+id/image"
-            android:src="@drawable/feature3_p"/>
+            android:id="@+id/image"/>
 
     </LinearLayout>
     <LinearLayout

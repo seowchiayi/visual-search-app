@@ -17,7 +17,7 @@
         android:padding="18dp"
         android:layout_alignParentTop="true"
         android:background="@color/displaybar"
-        android:text="test"
+        android:text=""
         android:textColor="@android:color/black"
         android:textSize="18dp"/>
     <TextView
@@ -66,19 +66,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="370dp">
+        android:layout_marginTop="365dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp">
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
+            android:layout_marginRight="32dp"
             android:text="present"
             android:id="@+id/present"
             android:textAllCaps="true"
             android:onClick="present"/>
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
             android:text="absent"
             android:id="@+id/absent"
             android:textAllCaps="true"
