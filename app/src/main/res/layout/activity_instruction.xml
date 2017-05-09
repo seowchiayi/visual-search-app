@@ -18,11 +18,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:textSize="15dp"
-        android:text="1. Make sure you have stable connection
-2. Every stage you will be given a target to find
-3. Press 'Present' if there is a target
-4. Press 'Absent' if there is no target"
-    />
+        android:text="1.Make sure you have stable connection" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="2.Every stage you will be given a target to find" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="3.Press 'Present' if there is a target" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="4.Press 'Absent' if there is no target" />
     <Button
         android:layout_width="130dp"
         android:layout_height="wrap_content"

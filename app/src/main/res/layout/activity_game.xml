@@ -73,7 +73,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="wrap_content"
-            android:layout_marginRight="32dp"
+            android:layout_marginRight="50dp"
             android:text="present"
             android:id="@+id/present"
             android:textAllCaps="true"

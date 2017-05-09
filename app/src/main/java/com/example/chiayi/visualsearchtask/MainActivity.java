@@ -55,10 +55,18 @@ public class MainActivity extends Activity {
         user.setAge(age);
         user.setGender(gender);
         user.setMatric(matric);
-        Intent intent = new Intent(MainActivity.this, Instruction.class);
-        intent.putExtra("msg",name);
-        startActivity(intent);
-        finish();
+
+        if(name.isEmpty() || age.isEmpty() || gender.isEmpty() || matric.isEmpty()){
+            Toast toast = Toast.makeText(MainActivity.this, "Please fill up all the details!", Toast.LENGTH_LONG);
+            toast.show();
+        }
+        else{
+            Intent intent = new Intent(MainActivity.this, Instruction.class);
+            intent.putExtra("msg",name);
+            startActivity(intent);
+            finish();
+        }
+
     }
 
 
