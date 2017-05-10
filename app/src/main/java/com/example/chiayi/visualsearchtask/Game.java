@@ -39,7 +39,7 @@ public class Game extends Activity {
     //to get the time left as score
     long time_left;
     //total score for the user
-    public static int result;
+    public static int result=0;
 
     //to know if user passed 75% of correctness for absent trials to make sure user is paying attention while playing
     public static double correct_absent=0;
@@ -78,7 +78,7 @@ public class Game extends Activity {
         //set original name,level,score on top of the display bar
         username.setText(msg);
         level.setText(1+"/"+imgs.length());
-        score.setText("Score : " + result);
+        score.setText("Score : " + 0);
 
         //start intializing runtask that randomize images, restart and cancel timer and handles button event
         gameplay();
@@ -169,6 +169,8 @@ public class Game extends Activity {
         present.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                present.setEnabled(false);
+                absent.setEnabled(false);
                 countdown.cancel();
                 result+=time_left;
                 score.setText("Score : "+result);
@@ -196,6 +198,8 @@ public class Game extends Activity {
                 }
 
                 gameplay();
+                present.setEnabled(true);
+                absent.setEnabled(true);
 
 
 
@@ -207,11 +211,15 @@ public class Game extends Activity {
         absent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                absent.setEnabled(false);
+                present.setEnabled(false);
                 countdown.cancel();
                 if(ans.substring(23,24).equals("a")){
                     correct_absent+=1;
                 }
                 gameplay();
+                absent.setEnabled(true);
+                present.setEnabled(true);
 
             }
         });

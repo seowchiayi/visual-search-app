@@ -174,6 +174,8 @@ public class Game2 extends Activity {
         present.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                present.setEnabled(false);
+                absent.setEnabled(false);
                 countdown.cancel();
                 if(p.equals("p")){
                     Game.result+=time_left;
@@ -203,6 +205,8 @@ public class Game2 extends Activity {
                 }
 
                 gameplay();
+                present.setEnabled(true);
+                absent.setEnabled(true);
 
 
             }
@@ -210,11 +214,17 @@ public class Game2 extends Activity {
         absent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                absent.setEnabled(false);
+                present.setEnabled(false);
                 countdown.cancel();
                 if(ans.substring(27,28).equals("a")){
                     Game.correct_absent+=1;
                 }
                 gameplay();
+                absent.setEnabled(true);
+                present.setEnabled(true);
+
 
             }
         });
@@ -226,7 +236,7 @@ public class Game2 extends Activity {
         Log.i("ca",String.valueOf(Game.correct_absent));
 
         if(i==imgs.length()+1){
-            FirebaseDatabase db=FirebaseDatabase.getInstance();
+            FirebaseDatabase db=FirebaseDatabase.getInstance("https://visualsearchtask.firebaseio.com/");
             DatabaseReference ref=db.getReference();
             MainActivity.user.setScore(String.valueOf(Game.result));
             MainActivity.user.setAccurate((Game.correct_absent/40)*100);
