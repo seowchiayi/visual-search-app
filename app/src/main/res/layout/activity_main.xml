@@ -9,17 +9,29 @@
     android:orientation="vertical"
     tools:context="com.example.chiayi.visualsearchtask.MainActivity">
 
-    <!--<TextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Visual Search Task"
-        android:layout_gravity="center"/>-->
+        android:textStyle="italic"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:textColor="@color/theme"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:text="Triesman and Gelade (1980)"
+        android:textStyle="italic"
+        android:layout_marginTop="10dp"
+        android:textSize="18sp"
+        android:layout_gravity="center"/>
 
     <EditText
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="25dp"
         android:paddingBottom="15dp"
         android:ems="10"
         android:textColorHint="@android:color/darker_gray"
@@ -83,7 +95,7 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="34dp"
+            android:layout_marginTop="1dp"
             android:text="Sign Up"
             android:textAllCaps="true"
             android:onClick="signup"/>

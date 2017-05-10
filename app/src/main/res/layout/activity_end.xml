@@ -10,16 +10,23 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="25dp"
         android:text="You have completed the experiment!"
+        android:textColor="@color/theme"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:textSize="40dp" />
+        android:textSize="35dp" />
+    <ImageView
+        android:layout_width="91dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:src="@drawable/handsup"/>
     <Button
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Replay"
-        android:layout_marginTop="127dp"
+        android:layout_marginTop="55dp"
         android:textAllCaps="true"
         android:layout_gravity="center"
         android:onClick="replay"/>
