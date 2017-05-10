@@ -55,6 +55,17 @@ public class MainActivity extends Activity {
         user.setAge(age);
         user.setGender(gender);
         user.setMatric(matric);
+        user.setScore("0");
+        user.setAccurate(0);
+        user.setStatus("");
+        user.setFea_AvgTime3(0);
+        user.setFea_AvgTime6(0);
+        user.setFea_AvgTime9(0);
+        user.setFea_AvgTime12(0);
+        user.setCon_AvgTime12(0);
+        user.setCon_AvgTime12(0);
+        user.setCon_AvgTime12(0);
+        user.setCon_AvgTime12(0);
 
         if(name.isEmpty() || age.isEmpty() || gender.isEmpty() || matric.isEmpty()){
             Toast toast = Toast.makeText(MainActivity.this, "Please fill up all the details!", Toast.LENGTH_LONG);

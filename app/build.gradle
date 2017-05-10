@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        visual_key {
+            keyAlias 'visual_key'
+            keyPassword 'alicia95'
+            storeFile file('C:/Users/Chia Yi/Desktop/visualsearchtask/visual_key.jks')
+            storePassword 'alicia95'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -15,6 +23,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            signingConfig signingConfigs.visual_key
         }
     }
     productFlavors {

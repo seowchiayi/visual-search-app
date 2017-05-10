@@ -14,7 +14,11 @@ public class End extends Activity {
         Intent intent=getIntent();
     }
     public void replay(View view){
+
         Intent target = new Intent(End.this,MainActivity.class);
         startActivity(target);
+        finish();
+        System.exit(0);
+
     }
 }

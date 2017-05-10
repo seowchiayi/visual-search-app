@@ -10,17 +10,17 @@ class User {
     private String gender;
     private String matric;
 
-    private String score;
-    private double accurate;
-    private String status;
-    private double feature_avg_time_3;
-    private double feature_avg_time_6;
-    private double feature_avg_time_9;
-    private double feature_avg_time_12;
-    private double con_avg_time_3;
-    private double con_avg_time_6;
-    private double con_avg_time_9;
-    private double con_avg_time_12;
+    private String score="";
+    private double accurate=0;
+    private String status="";
+    private double feature_avg_time_3=0;
+    private double feature_avg_time_6=0;
+    private double feature_avg_time_9=0;
+    private double feature_avg_time_12=0;
+    private double con_avg_time_3=0;
+    private double con_avg_time_6=0;
+    private double con_avg_time_9=0;
+    private double con_avg_time_12=0;
 
     public User(){
 

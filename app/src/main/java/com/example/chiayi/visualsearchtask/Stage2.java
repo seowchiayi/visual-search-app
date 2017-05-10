@@ -18,6 +18,7 @@ public class Stage2 extends Activity {
         Intent game = new Intent(Stage2.this,Game2.class);
         game.putExtra("msg",msg);
         startActivity(game);
+        finish();
 
     }
 }

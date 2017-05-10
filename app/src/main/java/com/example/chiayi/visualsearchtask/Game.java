@@ -37,7 +37,7 @@ public class Game extends Activity {
     //string for the image name to know the answer
     String ans;
     //to get the time left as score
-    long time_left;
+    long time_left=0;
     //total score for the user
     public static int result=0;
 
