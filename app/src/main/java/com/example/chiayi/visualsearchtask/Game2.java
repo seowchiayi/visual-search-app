@@ -218,7 +218,7 @@ public class Game2 extends Activity {
                 absent.setEnabled(false);
                 present.setEnabled(false);
                 countdown.cancel();
-                if(ans.substring(27,28).equals("a")){
+                if(p.equals("a") || ans.substring(27,28).equals("a")){
                     Game.correct_absent+=1;
                 }
                 gameplay();

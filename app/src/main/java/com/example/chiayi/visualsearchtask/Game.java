@@ -214,7 +214,7 @@ public class Game extends Activity {
                 absent.setEnabled(false);
                 present.setEnabled(false);
                 countdown.cancel();
-                if(ans.substring(23,24).equals("a")){
+                if(p.equals("a") || ans.substring(23,24).equals("a")){
                     correct_absent+=1;
                 }
                 gameplay();
