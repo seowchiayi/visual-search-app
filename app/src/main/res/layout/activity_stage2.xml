@@ -13,12 +13,20 @@
         android:text="Stage 2"
         android:textColor="@android:color/black"
         android:layout_gravity="center"
-        android:textSize="40dp"
+        android:textSize="40dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Keep Going ! :D"
+        android:textColor="@android:color/black"
+        android:layout_gravity="center"
+        android:textSize="20dp"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:text="Target:"
         android:textColor="@color/theme"
         android:layout_gravity="center"
@@ -47,7 +55,7 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:text="Play"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="23dp"
         android:textAllCaps="true"
         android:layout_gravity="center"
         android:onClick="play"/>

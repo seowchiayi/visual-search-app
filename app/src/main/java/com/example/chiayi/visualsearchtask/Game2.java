@@ -33,7 +33,7 @@ public class Game2 extends Activity {
 
     ArrayList<Integer> remove=new ArrayList<Integer>();
     //the count for level
-    int i=40;
+    int i=0;
     //countdown timer for the game
     CountDownTimer countdown;
     //string for the image name to know the answer
@@ -53,9 +53,6 @@ public class Game2 extends Activity {
     int con6=0;
     int con9=0;
     int con12=0;
-
-
-    int counter=0;
     TrialsData stg2_trial_data=new TrialsData();
     final FirebaseDatabase trial_data=FirebaseDatabase.getInstance("https://visual2-af586.firebaseio.com/");
     final DatabaseReference trial_ref=trial_data.getReference();
@@ -83,7 +80,7 @@ public class Game2 extends Activity {
 
         //set original name,level,score on top of the display bar
         username.setText(msg);
-        level.setText("40/80");
+        level.setText(1+"/"+imgs.length());
         score.setText("Score : " + Game.result);
         stg2_trial_data.setPlayer_name(msg);
 
@@ -97,15 +94,15 @@ public class Game2 extends Activity {
     public void gameplay() {
         i++;
         Random rand = new Random();
-        if(i>41 && i<=imgs.length()){
-            level.setText(String.valueOf(i) + "/80");
+        if(i>1 && i<=imgs.length()){
+            level.setText(String.valueOf(i) + "/" +imgs.length());
             stg2_trial_data.setTrial_no(i);
             int rndInt = rand.nextInt(imgs.length());
             while(remove.contains(rndInt)){
                 rndInt = rand.nextInt(imgs.length());
 
             }
-            img.setImageResource(imgs.getResourceId(rndInt, 0));
+            img.setImageResource(imgs.getResourceId(rndInt,0));
             remove.add(0,rndInt);
             // get resource ID by index
             //0 is the value to return when no image is found
@@ -114,7 +111,7 @@ public class Game2 extends Activity {
 
 
         }
-        else if(i<=41){
+        else if(i<=1){
             int rndInt = rand.nextInt(imgs.length());
             stg2_trial_data.setTrial_no(i);
             remove.add(0,rndInt);
@@ -125,7 +122,7 @@ public class Game2 extends Activity {
             img.setImageResource(imgs.getResourceId(rndInt, 0));
         }
 
-        countdown=new CountDownTimer(41000, 1000) {
+        countdown=new CountDownTimer(11000, 1000) {
             public void onTick(long millisUntilFinished) {
                 time_left=millisUntilFinished/1000;
                 timer.setText(time_left+" s");
@@ -150,7 +147,7 @@ public class Game2 extends Activity {
                 absent.setEnabled(false);
                 countdown.cancel();
                 stg2_trial_data.setUser_ans("Present");
-                stg2_trial_data.setResponse_time(time_left);
+
                 if(p.equals("p") || ans.substring(27,28).equals("p")){
                     stg2_trial_data.setTarget_status("Present");
                     stg2_trial_data.setReal_answer("Correct");
@@ -194,6 +191,8 @@ public class Game2 extends Activity {
                     stg2_trial_data.setTarget_status("Absent");
                     stg2_trial_data.setReal_answer("Wrong");
                     stg2_trial_data.setScore_per_trial(0);
+                    stg2_trial_data.setResponse_time(-1);
+                    stg2_trial_data.setScore_per_trial(0);
 
                 }
 
@@ -219,10 +218,13 @@ public class Game2 extends Activity {
                     stg2_trial_data.setTarget_status("Absent");
                     stg2_trial_data.setReal_answer("Correct");
                     stg2_trial_data.setScore_per_trial(0);
+                    stg2_trial_data.setResponse_time(-1);
+                    stg2_trial_data.setDist_no(0);
                 }
                 else if(p.equals("p") || ans.substring(27,28).equals("p")){
                     stg2_trial_data.setTarget_status("Present");
                     stg2_trial_data.setReal_answer("Wrong");
+                    stg2_trial_data.setScore_per_trial(0);
                     if(dist.equals(String.valueOf(3))){
                         stg2_trial_data.setDist_no(3);
                         stg2_trial_data.setResponse_time(time_left);

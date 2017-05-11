@@ -84,7 +84,7 @@ public class Game extends Activity {
 
         //set original name,level,score on top of the display bar
         username.setText(msg);
-        level.setText("1/80");
+        level.setText(1+"/"+imgs.length());
         score.setText("Score : " + 0);
         each_trial_data.setPlayer_name(msg);
 
@@ -100,7 +100,7 @@ public class Game extends Activity {
         i++;
         Random rand = new Random();
         if(i>1 && i<=imgs.length()){
-            level.setText(String.valueOf(i) + "/80");
+            level.setText(String.valueOf(i) + "/" + imgs.length());
             each_trial_data.setTrial_no(i);
             int rndInt = rand.nextInt(imgs.length());
             while(remove.contains(rndInt)){
@@ -127,7 +127,7 @@ public class Game extends Activity {
             img.setImageResource(imgs.getResourceId(rndInt, 0));
         }
 
-        countdown=new CountDownTimer(41000, 1000) {
+        countdown=new CountDownTimer(11000, 1000) {
             public void onTick(long millisUntilFinished) {
                 time_left=millisUntilFinished/1000;
                 timer.setText(time_left+" s");
@@ -195,6 +195,8 @@ public class Game extends Activity {
                 else{
                     each_trial_data.setTarget_status("Absent");
                     each_trial_data.setReal_answer("Wrong");
+                    each_trial_data.setDist_no(0);
+                    each_trial_data.setResponse_time(-1);
                     each_trial_data.setScore_per_trial(0);
                 }
 
@@ -222,7 +224,9 @@ public class Game extends Activity {
                 if(p.equals("a") || ans.substring(23,24).equals("a")){
                     each_trial_data.setTarget_status("Absent");
                     each_trial_data.setReal_answer("Correct");
+                    each_trial_data.setResponse_time(-1);
                     each_trial_data.setScore_per_trial(0);
+                    each_trial_data.setDist_no(0);
                     correct_absent+=1;
                 }
                 else if(p.equals("p") || ans.substring(23,24).equals("p")){
