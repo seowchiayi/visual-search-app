@@ -56,6 +56,9 @@ public class Game2 extends Activity {
 
 
     int counter=0;
+    TrialsData stg2_trial_data=new TrialsData();
+    final FirebaseDatabase trial_data=FirebaseDatabase.getInstance("https://visual2-af586.firebaseio.com/");
+    final DatabaseReference trial_ref=trial_data.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,43 +84,13 @@ public class Game2 extends Activity {
         username.setText(msg);
         level.setText(1+"/"+imgs.length());
         score.setText("Score : " + Game.result);
+        stg2_trial_data.setPlayer_name(msg);
+
 
         //start intializing runtask that randomize images, restart and cancel timer and handles button event
         gameplay();
 
     }
-    //run task schedule the runtask method to run periodically until the level ends
-    /*public void runtask() {
-        final Handler handler = new Handler();
-        final Timer t = new Timer(); //This is new
-        TimerTask timertask= new TimerTask() {
-
-            @Override
-            public void run() {
-                if(++counter==imgs.length()+1){
-                    t.cancel();
-                    Intent target = new Intent(Game2.this,End.class);
-                    startActivity(target);
-                    finish();
-
-                }
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        try {
-                            gameplay();
-
-                        } catch (Exception e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
-            }
-        };
-
-        t.scheduleAtFixedRate(timertask, 0, 11000); // execute in every 15sec
-    }*/
 
     //the method that will be repeated, the core of the page
     public void gameplay() {
@@ -125,6 +98,7 @@ public class Game2 extends Activity {
         Random rand = new Random();
         if(i>1 && i<=imgs.length()){
             level.setText(String.valueOf(i) + "/" + String.valueOf(imgs.length()));
+            stg2_trial_data.setTrial_no(i);
             int rndInt = rand.nextInt(imgs.length());
             while(remove.contains(rndInt)){
                 rndInt = rand.nextInt(imgs.length());
@@ -141,6 +115,7 @@ public class Game2 extends Activity {
         }
         else if(i<=1){
             int rndInt = rand.nextInt(imgs.length());
+            stg2_trial_data.setTrial_no(i);
             remove.add(0,rndInt);
             // get resource ID by index
             //0 is the value to return when no image is found
@@ -164,10 +139,8 @@ public class Game2 extends Activity {
         final String p=ans.substring(26,27);
         final String dist=ans.substring(24,25);
 
-        Log.i("p",p);
-        Log.i("dist",String.valueOf(dist));
-        Log.i("12ap",ans.substring(27,28));
-        Log.i("dist12",ans.substring(24,26));
+        stg2_trial_data.setTask("Conjunction");
+
 
 
 
@@ -177,32 +150,75 @@ public class Game2 extends Activity {
                 present.setEnabled(false);
                 absent.setEnabled(false);
                 countdown.cancel();
+                stg2_trial_data.setUser_ans("Present");
+                stg2_trial_data.setResponse_time(time_left);
                 if(p.equals("p")){
-                    Game.result+=time_left;
-
-                    Log.i("in present",String.valueOf(Game.result));
-                    score.setText("Score: "+Game.result);
+                    stg2_trial_data.setTarget_status("Present");
+                    stg2_trial_data.setReal_answer("Correct");
                     if(dist.equals(String.valueOf(3))){
+                        stg2_trial_data.setDist_no(3);
+                        stg2_trial_data.setScore_per_trial(time_left);
+                        Game.result+=time_left;
                         avgtime_con_3+=time_left;
                         con3++;
                     }
                     else if(dist.equals(String.valueOf(6))){
+                        stg2_trial_data.setDist_no(6);
+                        stg2_trial_data.setScore_per_trial(time_left);
+                        Game.result+=time_left;
                         avgtime_con_6+=time_left;
                         con6++;
                     }
                     else if(dist.equals(String.valueOf(9))){
+                        stg2_trial_data.setDist_no(9);
+                        stg2_trial_data.setScore_per_trial(time_left);
+                        Game.result+=time_left;
                         avgtime_con_9+=time_left;
                         con9++;
                     }
 
 
                 }
-                if(ans.substring(27,28).equals("p")){
-                    if(ans.substring(24,26).equals(String.valueOf(12))){
+                if(ans.substring(27,28).equals("p") && ans.substring(24,26).equals(String.valueOf(12))){
+                    stg2_trial_data.setReal_answer("Correct");
+                    stg2_trial_data.setTarget_status("Present");
+                    stg2_trial_data.setDist_no(12);
+                    stg2_trial_data.setScore_per_trial(time_left);
+                        Game.result+=time_left;
+                        avgtime_con_12+=time_left;
+                        con12++;
+                }
+                else{
+                    stg2_trial_data.setTarget_status("Absent");
+                    if(dist.equals(String.valueOf(3))){
+                        stg2_trial_data.setDist_no(3);
+                        stg2_trial_data.setResponse_time(time_left);
+                        avgtime_con_3+=time_left;
+                        con3++;
+                    }
+                    else if(dist.equals(String.valueOf(6))){
+                        stg2_trial_data.setDist_no(6);
+                        stg2_trial_data.setResponse_time(time_left);
+                        avgtime_con_6+=time_left;
+                        con6++;
+                    }
+                    else if(dist.equals(String.valueOf(9))){
+                        stg2_trial_data.setDist_no(9);
+                        stg2_trial_data.setResponse_time(time_left);
+                        avgtime_con_9+=time_left;
+                        con9++;
+                    }
+                    else if(ans.substring(24,26).equals(String.valueOf(12))){
+                        stg2_trial_data.setDist_no(12);
+                        stg2_trial_data.setResponse_time(time_left);
                         avgtime_con_12+=time_left;
                         con12++;
                     }
+
                 }
+
+                score.setText("Score: "+Game.result);
+                trial_ref.push().setValue(stg2_trial_data);
 
                 gameplay();
                 present.setEnabled(true);
@@ -214,13 +230,13 @@ public class Game2 extends Activity {
         absent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 absent.setEnabled(false);
                 present.setEnabled(false);
                 countdown.cancel();
                 if(p.equals("a") || ans.substring(27,28).equals("a")){
                     Game.correct_absent+=1;
                 }
+                trial_ref.push().setValue(stg2_trial_data);
                 gameplay();
                 absent.setEnabled(true);
                 present.setEnabled(true);
@@ -228,13 +244,7 @@ public class Game2 extends Activity {
 
             }
         });
-
-        Log.i("con3",String.valueOf(con3));
-        Log.i("con6",String.valueOf(con6));
-        Log.i("con9",String.valueOf(con9));
-        Log.i("con12",String.valueOf(con12));
-        Log.i("ca",String.valueOf(Game.correct_absent));
-
+        trial_ref.push().setValue(stg2_trial_data);
         if(i==imgs.length()+1){
             FirebaseDatabase db=FirebaseDatabase.getInstance("https://visualsearchtask.firebaseio.com/");
             DatabaseReference ref=db.getReference();
@@ -251,6 +261,7 @@ public class Game2 extends Activity {
             MainActivity.user.setCon_AvgTime9(avgtime_con_9/5);
             MainActivity.user.setCon_AvgTime12(avgtime_con_12/5);
 
+            trial_ref.push().setValue(stg2_trial_data);
             //to be call after everything ends because we need to get avg
 
             ref.push().setValue(MainActivity.user);

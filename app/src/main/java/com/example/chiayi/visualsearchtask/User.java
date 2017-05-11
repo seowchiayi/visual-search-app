@@ -21,6 +21,11 @@ class User {
     private double con_avg_time_6=0;
     private double con_avg_time_9=0;
     private double con_avg_time_12=0;
+    private String type="";
+    private String answer="";
+    private String user_input="";
+    private String time_taken="";
+
 
     public User(){
 

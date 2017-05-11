@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="Target:"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="@color/theme"
         android:layout_gravity="center"
         android:textSize="30dp"
         />
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="Red bar tilted to the left"
         android:layout_marginTop="15dp"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="@color/theme"
         android:layout_gravity="center"
         android:textSize="25dp"
         android:textAlignment="center"

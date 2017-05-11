@@ -19,7 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Read before you start !"
-        android:textColor="@android:color/holo_red_light"
+        android:textColor="@color/theme"
         android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:textSize="24dp"/>
@@ -35,28 +35,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15dp"
-        android:text="2.Every stage you will be given a target to find"
+        android:text="2.There are 2 stages in this game"
+        android:layout_marginTop="10dp"
         android:textStyle="bold"
         android:textColor="@android:color/black"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15dp"
-        android:text="3.Press 'Present' if there is a target"
+        android:text="3.Each stage you will be given a target to find"
+        android:layout_marginTop="10dp"
         android:textStyle="bold"
         android:textColor="@android:color/black"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="15dp"
-        android:text="4.Press 'Absent' if there is no target"
+        android:text="4.Press 'Present' if there is a target"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="5.Press 'Absent' if there is no target"
+        android:layout_marginTop="10dp"
         android:textStyle="bold"
         android:textColor="@android:color/black"/>
     <Button
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="90dp"
         android:text="Play"
         android:onClick="start"
         android:textAllCaps="true"/>
