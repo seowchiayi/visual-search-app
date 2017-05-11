@@ -51,11 +51,6 @@ public class Game extends Activity {
     double avgtime_feature_12;
 
 
-    int fea3=0;
-    int fea6=0;
-    int fea9=0;
-    int fea12=0;
-
     TrialsData each_trial_data=new TrialsData();
     final FirebaseDatabase trial_data=FirebaseDatabase.getInstance("https://visual2-af586.firebaseio.com/");
     final DatabaseReference trial_ref=trial_data.getReference();
@@ -108,10 +103,11 @@ public class Game extends Activity {
 
             }
             img.setImageResource(imgs.getResourceId(rndInt, 0));
-            remove.add(0,rndInt);
+            remove.add(i-1,rndInt);
             // get resource ID by index
             //0 is the value to return when no image is found
             ans = imgs.getString(rndInt);
+            each_trial_data.setPhoto_name(ans);
             // or set you ImageView's resource to the id
 
 
@@ -123,6 +119,7 @@ public class Game extends Activity {
             // get resource ID by index
             //0 is the value to return when no image is found
             ans = imgs.getString(rndInt);
+            each_trial_data.setPhoto_name(ans);
             // or set you ImageView's resource to the id
             img.setImageResource(imgs.getResourceId(rndInt, 0));
         }
@@ -149,7 +146,7 @@ public class Game extends Activity {
         present.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            if(i<=imgs.length()){
                 present.setEnabled(false);
                 absent.setEnabled(false);
                 countdown.cancel();
@@ -164,7 +161,6 @@ public class Game extends Activity {
                         each_trial_data.setResponse_time(time_left);
                         result+=time_left;
                         avgtime_feature_3+=time_left;
-                        fea3++;
                     }
                     else if(dist.equals(String.valueOf(6))){
                         each_trial_data.setDist_no(6);
@@ -172,7 +168,6 @@ public class Game extends Activity {
                         each_trial_data.setResponse_time(time_left);
                         result+=time_left;
                         avgtime_feature_6+=time_left;
-                        fea6++;
                     }
                     else if(dist.equals(String.valueOf(9))){
                         each_trial_data.setDist_no(9);
@@ -180,7 +175,6 @@ public class Game extends Activity {
                         each_trial_data.setResponse_time(time_left);
                         result+=time_left;
                         avgtime_feature_9+=time_left;
-                        fea9++;
                     }
                     else if(ans.substring(20,22).equals(String.valueOf(12))){
                         each_trial_data.setDist_no(12);
@@ -188,7 +182,6 @@ public class Game extends Activity {
                         each_trial_data.setResponse_time(time_left);
                         result+=time_left;
                         avgtime_feature_12+=time_left;
-                        fea12++;
                     }
                 }
 
@@ -206,6 +199,9 @@ public class Game extends Activity {
                 present.setEnabled(true);
                 absent.setEnabled(true);
 
+            }
+
+
 
 
 
@@ -216,7 +212,7 @@ public class Game extends Activity {
         absent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            if(i<=imgs.length()){
                 absent.setEnabled(false);
                 present.setEnabled(false);
                 countdown.cancel();
@@ -229,7 +225,7 @@ public class Game extends Activity {
                     each_trial_data.setDist_no(0);
                     correct_absent+=1;
                 }
-                else if(p.equals("p") || ans.substring(23,24).equals("p")){
+                else if(p.equals("p")||ans.substring(23,24).equals("p") ){
                     each_trial_data.setTarget_status("Present");
                     each_trial_data.setReal_answer("Wrong");
                     each_trial_data.setScore_per_trial(0);
@@ -237,34 +233,35 @@ public class Game extends Activity {
                         each_trial_data.setDist_no(3);
                         each_trial_data.setResponse_time(time_left);
                         avgtime_feature_3+=time_left;
-                        fea3++;
                     }
                     else if(dist.equals(String.valueOf(6))){
                         each_trial_data.setDist_no(6);
                         each_trial_data.setResponse_time(time_left);
                         avgtime_feature_6+=time_left;
 
-                        fea6++;
                     }
                     else if(dist.equals(String.valueOf(9))){
                         each_trial_data.setDist_no(9);
                         each_trial_data.setResponse_time(time_left);
                         avgtime_feature_9+=time_left;
 
-                        fea9++;
                     }
                     else if(ans.substring(20,22).equals(String.valueOf(12))){
                         each_trial_data.setDist_no(12);
                         each_trial_data.setResponse_time(time_left);
                         avgtime_feature_12+=time_left;
-                        fea12++;
+
                     }
 
+
                 }
+
                 trial_ref.push().setValue(each_trial_data);
                 gameplay();
                 absent.setEnabled(true);
                 present.setEnabled(true);
+            }
+
 
             }
         });

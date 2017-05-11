@@ -49,10 +49,6 @@ public class Game2 extends Activity {
     double avgtime_con_9;
     double avgtime_con_12;
 
-    int con3=0;
-    int con6=0;
-    int con9=0;
-    int con12=0;
     TrialsData stg2_trial_data=new TrialsData();
     final FirebaseDatabase trial_data=FirebaseDatabase.getInstance("https://visual2-af586.firebaseio.com/");
     final DatabaseReference trial_ref=trial_data.getReference();
@@ -103,10 +99,11 @@ public class Game2 extends Activity {
 
             }
             img.setImageResource(imgs.getResourceId(rndInt,0));
-            remove.add(0,rndInt);
+            remove.add(i-1,rndInt);
             // get resource ID by index
             //0 is the value to return when no image is found
             ans = imgs.getString(rndInt);
+            stg2_trial_data.setPhoto_name(ans);
             // or set you ImageView's resource to the id
 
 
@@ -118,6 +115,7 @@ public class Game2 extends Activity {
             // get resource ID by index
             //0 is the value to return when no image is found
             ans = imgs.getString(rndInt);
+            stg2_trial_data.setPhoto_name(ans);
             // or set you ImageView's resource to the id
             img.setImageResource(imgs.getResourceId(rndInt, 0));
         }
@@ -143,6 +141,7 @@ public class Game2 extends Activity {
         present.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            if(i<=imgs.length()){
                 present.setEnabled(false);
                 absent.setEnabled(false);
                 countdown.cancel();
@@ -157,7 +156,6 @@ public class Game2 extends Activity {
                         stg2_trial_data.setResponse_time(time_left);
                         Game.result+=time_left;
                         avgtime_con_3+=time_left;
-                        con3++;
                     }
                     else if(dist.equals(String.valueOf(6))){
                         stg2_trial_data.setDist_no(6);
@@ -165,7 +163,6 @@ public class Game2 extends Activity {
                         stg2_trial_data.setResponse_time(time_left);
                         Game.result+=time_left;
                         avgtime_con_6+=time_left;
-                        con6++;
                     }
                     else if(dist.equals(String.valueOf(9))){
                         stg2_trial_data.setDist_no(9);
@@ -173,7 +170,6 @@ public class Game2 extends Activity {
                         stg2_trial_data.setResponse_time(time_left);
                         Game.result+=time_left;
                         avgtime_con_9+=time_left;
-                        con9++;
                     }
                     else if(ans.substring(24,26).equals(String.valueOf(12))){
                         stg2_trial_data.setDist_no(12);
@@ -181,7 +177,6 @@ public class Game2 extends Activity {
                         stg2_trial_data.setResponse_time(time_left);
                         Game.result+=time_left;
                         avgtime_con_12+=time_left;
-                        con12++;
                     }
 
 
@@ -190,9 +185,11 @@ public class Game2 extends Activity {
                 else{
                     stg2_trial_data.setTarget_status("Absent");
                     stg2_trial_data.setReal_answer("Wrong");
-                    stg2_trial_data.setScore_per_trial(0);
+                    stg2_trial_data.setDist_no(0);
                     stg2_trial_data.setResponse_time(-1);
                     stg2_trial_data.setScore_per_trial(0);
+
+
 
                 }
 
@@ -203,12 +200,16 @@ public class Game2 extends Activity {
                 present.setEnabled(true);
                 absent.setEnabled(true);
 
+            }
+
+
 
             }
         });
         absent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            if(i<=imgs.length()){
                 absent.setEnabled(false);
                 present.setEnabled(false);
                 stg2_trial_data.setUser_ans("Absent");
@@ -225,35 +226,36 @@ public class Game2 extends Activity {
                     stg2_trial_data.setTarget_status("Present");
                     stg2_trial_data.setReal_answer("Wrong");
                     stg2_trial_data.setScore_per_trial(0);
+
                     if(dist.equals(String.valueOf(3))){
                         stg2_trial_data.setDist_no(3);
                         stg2_trial_data.setResponse_time(time_left);
                         avgtime_con_3+=time_left;
-                        con3++;
                     }
                     else if(dist.equals(String.valueOf(6))){
                         stg2_trial_data.setDist_no(6);
                         stg2_trial_data.setResponse_time(time_left);
                         avgtime_con_6+=time_left;
-                        con6++;
                     }
                     else if(dist.equals(String.valueOf(9))){
                         stg2_trial_data.setDist_no(9);
                         stg2_trial_data.setResponse_time(time_left);
                         avgtime_con_9+=time_left;
-                        con9++;
                     }
-                    else if(ans.substring(24,26).equals(12)){
+                    else if(ans.substring(24,26).equals(String.valueOf(12))){
                         stg2_trial_data.setDist_no(12);
                         stg2_trial_data.setResponse_time(time_left);
                         avgtime_con_12+=time_left;
-                        con12++;
                     }
+
                 }
+
                 trial_ref.push().setValue(stg2_trial_data);
                 gameplay();
                 absent.setEnabled(true);
                 present.setEnabled(true);
+            }
+
 
 
             }
@@ -275,8 +277,8 @@ public class Game2 extends Activity {
             MainActivity.user.setCon_AvgTime9(avgtime_con_9/5);
             MainActivity.user.setCon_AvgTime12(avgtime_con_12/5);
             //to be call after everything ends because we need to get avg
-
             ref.push().setValue(MainActivity.user);
+
             Intent target = new Intent(Game2.this,End.class);
             startActivity(target);
             finish();

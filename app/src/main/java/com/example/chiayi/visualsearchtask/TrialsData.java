@@ -14,6 +14,7 @@ public class TrialsData {
     private String real_answer="Wrong";
     private long response_time=-1;
     private long score_per_trial=0;
+    private String photo_name="";
 
     public TrialsData(){
 
@@ -27,6 +28,7 @@ public class TrialsData {
     public String getReal_answer(){return real_answer;}
     public long getResponse_time(){return response_time;}
     public long getScore_per_trial(){return score_per_trial;}
+    public String getPhoto_name(){return photo_name;}
 
     public void setPlayer_name(String player_name){this.player_name=player_name;}
     public void setTrial_no(int trial_no){this.trial_no=trial_no;}
@@ -37,4 +39,5 @@ public class TrialsData {
     public void setReal_answer(String real_answer){this.real_answer=real_answer;}
     public void setResponse_time(long response_time){this.response_time=response_time;}
     public void setScore_per_trial(long score_per_trial){this.score_per_trial=score_per_trial;}
+    public void setPhoto_name(String photo_name){this.photo_name=photo_name;}
 }
