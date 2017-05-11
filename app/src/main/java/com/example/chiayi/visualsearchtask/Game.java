@@ -61,6 +61,7 @@ public class Game extends Activity {
     final DatabaseReference trial_ref=trial_data.getReference();
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,7 +84,7 @@ public class Game extends Activity {
 
         //set original name,level,score on top of the display bar
         username.setText(msg);
-        level.setText(1+"/"+imgs.length());
+        level.setText("1/80");
         score.setText("Score : " + 0);
         each_trial_data.setPlayer_name(msg);
 
@@ -99,7 +100,7 @@ public class Game extends Activity {
         i++;
         Random rand = new Random();
         if(i>1 && i<=imgs.length()){
-            level.setText(String.valueOf(i) + "/" + String.valueOf(imgs.length()));
+            level.setText(String.valueOf(i) + "/80");
             each_trial_data.setTrial_no(i);
             int rndInt = rand.nextInt(imgs.length());
             while(remove.contains(rndInt)){
@@ -126,14 +127,13 @@ public class Game extends Activity {
             img.setImageResource(imgs.getResourceId(rndInt, 0));
         }
 
-        countdown=new CountDownTimer(11000, 1000) {
+        countdown=new CountDownTimer(41000, 1000) {
             public void onTick(long millisUntilFinished) {
                 time_left=millisUntilFinished/1000;
                 timer.setText(time_left+" s");
             }
 
             public void onFinish() {
-                timer.setText("Times Up!");
                 gameplay();
             }
         }.start();
@@ -149,73 +149,53 @@ public class Game extends Activity {
         present.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 present.setEnabled(false);
                 absent.setEnabled(false);
                 countdown.cancel();
                 each_trial_data.setUser_ans("Present");
-                each_trial_data.setResponse_time(time_left);
 
-                if(p.equals("p")){
+                if(p.equals("p") || ans.substring(23,24).equals("p")){
                     each_trial_data.setTarget_status("Present");
                     each_trial_data.setReal_answer("Correct");
                     if(dist.equals(String.valueOf(3))){
                         each_trial_data.setDist_no(3);
-                        result+=time_left;
                         each_trial_data.setScore_per_trial(time_left);
+                        each_trial_data.setResponse_time(time_left);
+                        result+=time_left;
                         avgtime_feature_3+=time_left;
                         fea3++;
                     }
                     else if(dist.equals(String.valueOf(6))){
                         each_trial_data.setDist_no(6);
+                        each_trial_data.setScore_per_trial(time_left);
+                        each_trial_data.setResponse_time(time_left);
                         result+=time_left;
                         avgtime_feature_6+=time_left;
-                        each_trial_data.setScore_per_trial(time_left);
                         fea6++;
                     }
                     else if(dist.equals(String.valueOf(9))){
                         each_trial_data.setDist_no(9);
+                        each_trial_data.setScore_per_trial(time_left);
+                        each_trial_data.setResponse_time(time_left);
                         result+=time_left;
                         avgtime_feature_9+=time_left;
-                        each_trial_data.setScore_per_trial(time_left);
-                        fea9++;
-                    }
-                }
-
-                if(ans.substring(23,24).equals("p") && ans.substring(20,22).equals(String.valueOf(12))){
-                    each_trial_data.setTarget_status("Present");
-                    each_trial_data.setReal_answer("Correct");
-                    each_trial_data.setDist_no(12);
-                    each_trial_data.setScore_per_trial(time_left);
-                    result+=time_left;
-                    avgtime_feature_12+=time_left;
-                    fea12++;
-                }
-
-                else{
-                    each_trial_data.setTarget_status("Absent");
-                    if(dist.equals(String.valueOf(3))){
-                        each_trial_data.setDist_no(3);
-                        each_trial_data.setResponse_time(time_left);
-                        avgtime_feature_3+=time_left;
-                        fea3++;
-                    }
-                    else if(dist.equals(String.valueOf(6))){
-                        each_trial_data.setDist_no(6);
-                        avgtime_feature_6+=time_left;
-                        each_trial_data.setResponse_time(time_left);
-                        fea6++;
-                    }
-                    else if(dist.equals(String.valueOf(9))){
-                        each_trial_data.setDist_no(9);
-                        avgtime_feature_9+=time_left;
-                        each_trial_data.setResponse_time(time_left);
                         fea9++;
                     }
                     else if(ans.substring(20,22).equals(String.valueOf(12))){
                         each_trial_data.setDist_no(12);
-                        avgtime_feature_12+=time_left;
+                        each_trial_data.setScore_per_trial(time_left);
                         each_trial_data.setResponse_time(time_left);
+                        result+=time_left;
+                        avgtime_feature_12+=time_left;
+                        fea12++;
                     }
+                }
+
+                else{
+                    each_trial_data.setTarget_status("Absent");
+                    each_trial_data.setReal_answer("Wrong");
+                    each_trial_data.setScore_per_trial(0);
                 }
 
                 score.setText("Score : "+result);
@@ -234,15 +214,48 @@ public class Game extends Activity {
         absent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 absent.setEnabled(false);
                 present.setEnabled(false);
                 countdown.cancel();
-                each_trial_data.setTask("Feature");
                 each_trial_data.setUser_ans("Absent");
                 if(p.equals("a") || ans.substring(23,24).equals("a")){
-                    each_trial_data.setTask("Absent");
+                    each_trial_data.setTarget_status("Absent");
                     each_trial_data.setReal_answer("Correct");
+                    each_trial_data.setScore_per_trial(0);
                     correct_absent+=1;
+                }
+                else if(p.equals("p") || ans.substring(23,24).equals("p")){
+                    each_trial_data.setTarget_status("Present");
+                    each_trial_data.setReal_answer("Wrong");
+                    each_trial_data.setScore_per_trial(0);
+                    if(dist.equals(String.valueOf(3))){
+                        each_trial_data.setDist_no(3);
+                        each_trial_data.setResponse_time(time_left);
+                        avgtime_feature_3+=time_left;
+                        fea3++;
+                    }
+                    else if(dist.equals(String.valueOf(6))){
+                        each_trial_data.setDist_no(6);
+                        each_trial_data.setResponse_time(time_left);
+                        avgtime_feature_6+=time_left;
+
+                        fea6++;
+                    }
+                    else if(dist.equals(String.valueOf(9))){
+                        each_trial_data.setDist_no(9);
+                        each_trial_data.setResponse_time(time_left);
+                        avgtime_feature_9+=time_left;
+
+                        fea9++;
+                    }
+                    else if(ans.substring(20,22).equals(String.valueOf(12))){
+                        each_trial_data.setDist_no(12);
+                        each_trial_data.setResponse_time(time_left);
+                        avgtime_feature_12+=time_left;
+                        fea12++;
+                    }
+
                 }
                 trial_ref.push().setValue(each_trial_data);
                 gameplay();
@@ -251,7 +264,8 @@ public class Game extends Activity {
 
             }
         });
-        trial_ref.push().setValue(each_trial_data);
+
+
         if(i==imgs.length()+1){
 
             if(MainActivity.user.getAccurate()>=75){
@@ -266,7 +280,6 @@ public class Game extends Activity {
             MainActivity.user.setFea_AvgTime9(avgtime_feature_9/5);
             MainActivity.user.setFea_AvgTime12(avgtime_feature_12/5);
 
-            trial_ref.push().setValue(each_trial_data);
             Intent target = new Intent(Game.this,Stage2.class);
             target.putExtra("msg",msg);
             startActivity(target);
